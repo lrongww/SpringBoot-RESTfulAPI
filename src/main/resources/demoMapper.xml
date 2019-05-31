@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.DemoDAO">
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.DemoInfo">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+    </resultMap>
+
+    <parameterMap id="DemoInfo" type="com.example.demo.entity.DemoInfo"/>
+
+    <sql id="Base_Column_List">
+        id,name,description
+    </sql>
+    <select id="findAllDemo" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from t_demoinfo
+    </select>
+
+    <insert id="createDemo" parameterMap="DemoInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into
+        t_demoinfo(name,description)
+        values
+        (#{demo.name},#{demo.description})
+    </insert>
+
+</mapper>
